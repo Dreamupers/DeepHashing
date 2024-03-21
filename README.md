@@ -2,6 +2,11 @@
 
 Deep hashing methods, datasets, and tools
 
+Relevant works:
+
+* Unsupervised Hashing Retrieval via Efficient Correlation Distillation, IEEE TCSVT
+* Contrast-Based Unsupervised Hashing Learning With Multi-Hashcode, IEEE SPL
+
 ## Dataset
 
 multi-label image retrieval dataset: mirflickr25k, coco2017, and nuswide

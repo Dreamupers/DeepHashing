@@ -60,7 +60,7 @@ class COCOHashDataset(BaseHashDataset):
         self,
         img_transform, split,
         sample_size = None,
-        label_file= WORKDIR + 'data/coco2017/allannots20.txt', 
+        label_file= WORKDIR + 'data/coco/allannots20.txt', 
         img_root=DATASETDIR+'coco2017'
         ):
         assert split in ['train', 'db', 'query']
@@ -79,7 +79,7 @@ class COCOHashDataset(BaseHashDataset):
             json.dump(split_list, open(WORKDIR + 'data/hash_split_for_coco.json', 'w'))
         super().__init__(label_file, img_root, img_transform, split_list, split, sample_size)
 
-class MIRFlickrHashDataset(BaseHashDataset):
+class Flickr25kHashDataset(BaseHashDataset):
     def __init__(
         self,
         img_transform, split,
@@ -88,8 +88,8 @@ class MIRFlickrHashDataset(BaseHashDataset):
         img_root=DATASETDIR+'mirflickr'
         ):
         assert split in ['train', 'db', 'query']
-        if os.path.exists(WORKDIR + 'data/hash_split_for_mirflickr.json'):
-            split_list = json.load(open(WORKDIR + 'data/hash_split_for_mirflickr.json', 'r'))
+        if os.path.exists(WORKDIR + 'data/hash_split_for_flickr25k.json'):
+            split_list = json.load(open(WORKDIR + 'data/hash_split_for_flickr25k.json', 'r'))
         else:
             all_index = list(range(len(open(label_file, 'r').readlines())))
             query_index = random.sample(all_index, 2000)
@@ -100,7 +100,7 @@ class MIRFlickrHashDataset(BaseHashDataset):
                 'db': db_index,
                 'query': query_index
             }
-            json.dump(split_list, open(WORKDIR + 'data/hash_split_for_mirflickr.json', 'w'))
+            json.dump(split_list, open(WORKDIR + 'data/hash_split_for_flickr25k.json', 'w'))
         super().__init__(label_file, img_root, img_transform, split_list, split, sample_size)
 
 class NUSWideHashDataset(BaseHashDataset):

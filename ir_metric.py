@@ -4,7 +4,7 @@ import numba as nb
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 from ir_model import BaseIRModel
-from ir_dataset import NUSWideHashDataset, COCOHashDataset, Flickr25krHashDataset, test_transform, Cifar10
+from ir_dataset import NUSWideHashDataset, COCOHashDataset, Flickr25kHashDataset, test_transform, Cifar10
 
 @nb.njit('int32[:,::1](float32[:,::1])', parallel=True)
 def _argsort(a):
@@ -96,8 +96,8 @@ def map_test(model, args):
         query_dataset = COCOHashDataset(test_transform, 'query')
         db_dataset = COCOHashDataset(test_transform, 'db')
     elif args.dataset == 'flickr':
-        query_dataset = Flickr25krHashDataset(test_transform, 'query')
-        db_dataset = Flickr25krHashDataset(test_transform, 'db')
+        query_dataset = Flickr25kHashDataset(test_transform, 'query')
+        db_dataset = Flickr25kHashDataset(test_transform, 'db')
     elif args.dataset == 'nuswide':
         query_dataset = NUSWideHashDataset(test_transform, 'query')
         db_dataset = NUSWideHashDataset(test_transform, 'db')

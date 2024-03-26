@@ -64,7 +64,8 @@ def map_topk(inner_dot_neg, relevant_mask, topk=None):
     for query in range(relevant_mask.shape[0]):
         if np.sum(relevant_topk_mask[query]) == 0:
             AP.append(np.float32(0))
-        AP.append(np.sum(precision[query]*relevant_topk_mask[query]) / np.sum(relevant_topk_mask[query]))
+        else:
+            AP.append(np.sum(precision[query]*relevant_topk_mask[query]) / np.sum(relevant_topk_mask[query]))
     return float(np.mean(AP))
 
 def DCG(rel, dist, topk=None):

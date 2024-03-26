@@ -63,7 +63,7 @@ def map_topk(inner_dot_neg, relevant_mask, topk=None):
     precision = cumsum / np.arange(1, topkindex.shape[1]+1)
     for query in range(relevant_mask.shape[0]):
         if np.sum(relevant_topk_mask[query]) == 0:
-            continue
+            AP.append(np.float32(0))
         AP.append(np.sum(precision[query]*relevant_topk_mask[query]) / np.sum(relevant_topk_mask[query]))
     return float(np.mean(AP))
 

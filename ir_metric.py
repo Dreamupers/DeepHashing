@@ -4,7 +4,7 @@ import numba as nb
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 from ir_model import BaseIRModel
-from ir_dataset import NUSWideHashDataset, COCOHashDataset, Flickr25kHashDataset, test_transform, Cifar10
+from ir_dataset import NUSWideHashDataset, COCOHashDataset, Flickr25kHashDataset, test_transform
 
 @nb.njit('int32[:,::1](float32[:,::1])', parallel=True)
 def _argsort(a):

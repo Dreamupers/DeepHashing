@@ -6,22 +6,21 @@ from torch.utils.data import Dataset
 import os
 import json
 
-DATASETDIR = '/home/zx/dataset/hash/'
-WORKDIR = '/home/zx/deephash/'
-train_transform = transforms.Compose([
+DATASETDIR = '/home/xxx/dataset/hash/'
+WORKDIR = '/home/xxx/deephash/'
+IMAGENET1K_V1_train_transform = transforms.Compose([
     transforms.RandomHorizontalFlip(),
-    transforms.Resize(224),
-    transforms.RandomCrop(224),
+    transforms.Resize(size=256, interpolation=transforms.InterpolationMode.BILINEAR),
+    transforms.RandomCrop(size=(224, 224)),
     transforms.ToTensor(),
-    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
-test_transform = transforms.Compose([
-    transforms.Resize(224),
-    transforms.CenterCrop(224),
+IMAGENET1K_V1_test_transform = transforms.Compose([
+    transforms.Resize(size=256, interpolation=transforms.InterpolationMode.BILINEAR),
+    transforms.CenterCrop(size=(224, 224)),
     transforms.ToTensor(),
-    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
-
 
 class BaseHashDataset(Dataset):
     def __init__(self, label_file, img_root, img_transform, split_list, split, sample_size) -> None:
@@ -42,7 +41,7 @@ class BaseHashDataset(Dataset):
 
     def get_image(self, imgpath):
         with open(imgpath, 'rb') as imgf:
-            img = Image.open(imgf).convert('RGB')
+            img = Image.open(imgf).convert('RGB') # for RGBA
         return img
 
     def __getitem__(self, index):
@@ -50,7 +49,11 @@ class BaseHashDataset(Dataset):
         image =self.get_image(img_path)
         if self.img_transform is not None:
             image = self.img_transform(image)
-        return index, image, label
+        return {
+            "index": index,
+            "image": image,
+            "label": label
+        }
     
     def __len__(self):
         return len(self.global_index)

@@ -1,6 +1,8 @@
-# DeepHashing
+# DeepHashing Dataset
 
-Deep hashing methods, datasets, and tools
+Deep hashing datasets, and tools
+
+all hashing methods including supervised and unsupervised methods and train pipeline coming soon.
 
 Relevant works:
 
@@ -9,7 +11,7 @@ Relevant works:
 
 ## Dataset
 
-multi-label image retrieval dataset: mirflickr25k, coco2017, and nuswide
+multi-label image retrieval dataset: mirflickr25k(24 cls), coco2017(20 and 80 cls), and nuswide(21 and 81 cls)
 
 ## Evaluation
 

@@ -15,7 +15,7 @@ multi-label image retrieval dataset: mirflickr25k(24 cls), coco2017(20 and 80 cl
 
 ## Evaluation
 
-MAP and NDCG
+MAP, NDCG and ACG
 
 Efficient parallel metrics calculations running on the CPU
 
